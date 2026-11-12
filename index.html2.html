@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Online Store</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background-color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav a {
+            margin: 0 14px;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #0f172a;
+        }
+
+        .cart-btn {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
+                        url('https://picsum.photos/1400/600?random=10') center/cover no-repeat;
+            color: #ffffff;
+            text-align: center;
+            padding: 110px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto 28px;
+            color: #e2e8f0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ffffff;
+            color: #0f172a;
+            padding: 13px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #f1f5f9;
+        }
+
+        /* Products Grid */
+        .section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #0f172a;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #0f172a;
+        }
+
+        .product-price {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 14px;
+        }
+
+        .add-btn {
+            width: 100%;
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #2563eb;
+        }
+
+        /* Promo Banner */
+        .promo {
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 60px 0;
+        }
+
+        .promo-row {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .promo-img, .promo-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .promo-img img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 650px) {
+            header .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">MYSTORE</a>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#products">Shop</a>
+                <a href="#featured">Featured</a>
+            </nav>
+            <a href="#products" class="cart-btn" id="cart-count">Cart (0)</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>New Season Arrivals</h1>
+            <p>Discover premium quality products crafted for modern lifestyle and everyday comfort.</p>
+            <a href="#products" class="btn">Shop Collection</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid">
+                
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/500/500?random=11" alt="Classic Watch" class="product-img">
+                    <div class="product-info">
+                        <div class="product-title">Classic Minimal Watch</div>
+                        <div class="product-price">$89.00</div>
+                        <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/500/500?random=12" alt="Leather Backpack" class="product-img">
+                    <div class="product-info">
+                        <div class="product-title">Urban Leather Backpack</div>
+                        <div class="product-price">$120.00</div>
+                        <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/500/500?random=13" alt="Wireless Headphones" class="product-img">
+                    <div class="product-info">
+                        <div class="product-title">Studio Wireless Headphones</div>
+                        <div class="product-price">$149.00</div>
+                        <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/500/500?random=14" alt="Sneakers" class="product-img">
+                    <div class="product-info">
+                        <div class="product-title">Everyday Runner Sneakers</div>
+                        <div class="product-price">$95.00</div>
+                        <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Promo Section -->
+    <section class="promo" id="featured">
+        <div class="container">
+            <div class="promo-row">
+                <div class="promo-img">
+                    <img src="https://picsum.photos/800/550?random=15" alt="Special Offer">
+                </div>
+                <div class="promo-text">
+                    <h2 style="font-size: 2rem; margin-bottom: 14px; color: #0f172a;">Quality You Can Trust</h2>
+                    <p style="color: #475569; margin-bottom: 22px;">
+                        Free worldwide shipping on orders over $50. Easy 30-day returns and 24/7 customer support for every order.
+                    </p>
+                    <a href="#products" class="btn" style="background: #0f172a; color: #ffffff;">Explore Deals</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 MyStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Simple Cart Counter Script -->
+    <script>
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = 'Cart (' + count + ')';
+        }
+    </script>
+
+</body>
+</html>
